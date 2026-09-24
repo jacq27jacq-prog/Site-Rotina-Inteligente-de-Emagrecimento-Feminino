@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartFit Mulher - Rotina & Treinos Interativos para Emagrecimento</title>
+  <meta name="description" content="Guia interativo de musculação feminina focado em emagrecimento com os aparelhos da Smart Fit, vídeos de execução e timer de descanso.">
+  
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navegação Superior -->
+  <header class="navbar">
+    <div class="logo-container">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">SMART<span>FIT</span> FIT</div>
+      </div>
+      <span class="nav-badge">Foco Emagrecimento Feminino</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><button class="nav-btn active" onclick="document.getElementById('rotinas-section').scrollIntoView({behavior:'smooth'})">Rotina de Treinos</button></li>
+      <li><button class="nav-btn" onclick="document.getElementById('timer-section').scrollIntoView({behavior:'smooth'})">Timer de Descanso</button></li>
+      <li><button class="nav-btn" onclick="document.getElementById('calc-section').scrollIntoView({behavior:'smooth'})">Calculadora de Calorias</button></li>
+    </ul>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    
+    <!-- Hero / Apresentação -->
+    <section class="hero">
+      <div class="hero-pill">
+        <span>⚡ Treinos baseados nos aparelhos da Smart Fit</span>
+      </div>
+      <h1>Rotina Inteligente de <span class="highlight">Emagrecimento Feminino</span></h1>
+      <p>Exercícios com vídeos reais de execução, divisão metabólica AB/C, intervalos programados e foco total na perda de gordura mantendo a massa magra e o tônus muscular.</p>
+    </section>
+
+    <!-- Banner de Estatísticas e Progresso Rápido -->
+    <section class="stats-banner">
+      <div class="stat-card">
+        <div class="stat-icon pink">🏋️‍♀️</div>
+        <div class="stat-info">
+          <h4>Progresso da Sessão</h4>
+          <div class="stat-value" id="stat-progress">0%</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon yellow">🔥</div>
+        <div class="stat-info">
+          <h4>Exercícios Concluídos</h4>
+          <div class="stat-value" id="stat-completed-count">0 de 5</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon purple">⏱️</div>
+        <div class="stat-info">
+          <h4>Meta Semanal Recomendada</h4>
+          <div class="stat-value">3 a 4x / sem</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Widget Interativo de Cronômetro de Descanso entre Séries -->
+    <section class="rest-timer-widget" id="timer-section">
+      <div class="timer-left">
+        <div>
+          <div class="timer-label">Cronômetro de Recuperação Entre Séries</div>
+          <div class="timer-display" id="timer-display">00:45</div>
+        </div>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn-timer primary" id="btn-start-timer">Iniciar</button>
+        <button class="btn-timer" id="btn-reset-timer">Reiniciar (45s)</button>
+        <button class="btn-timer" id="btn-30s">30s (Intenso)</button>
+        <button class="btn-timer" id="btn-60s">60s (Pesado)</button>
+      </div>
+    </section>
+
+    <!-- Seção de Seleção de Divisão de Treino -->
+    <section id="rotinas-section">
+      <div class="routine-nav">
+        <button class="tab-btn active" data-workout="treinoA">
+          <span>Treino A</span>
+          <span class="tab-badge">Coxas & Glúteos</span>
+        </button>
+        <button class="tab-btn" data-workout="treinoB">
+          <span>Treino B</span>
+          <span class="tab-badge">Costas, Braços & Core</span>
+        </button>
+        <button class="tab-btn" data-workout="treinoC">
+          <span>Treino C</span>
+          <span class="tab-badge">Posterior, Glúteo & Escada</span>
+        </button>
+      </div>
+
+      <!-- Cabeçalho Informativo do Treino Selecionado -->
+      <div class="workout-header-card">
+        <div class="workout-header-info">
+          <h2 id="workout-title">Carregando treino...</h2>
+          <p id="workout-desc">Detalhes da rotina...</p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <span class="smartfit-tag" id="workout-zone-tag">Smart Fit Musculação</span>
+          <span class="smartfit-tag" id="workout-cal-tag">🔥 Gasto: 400 kcal</span>
+          <span class="smartfit-tag" id="workout-time-tag">⏱ Duração: 50 min</span>
+        </div>
+      </div>
+
+      <!-- Grade Dinâmica com Cards de Vídeos e Exercícios -->
+      <div class="exercise-grid" id="exercise-grid">
+        <!-- Renderizado dinamicamente pelo app.js -->
+      </div>
+    </section>
+
+    <!-- Calculadora Interativa de Emagrecimento e Déficit Calórico -->
+    <section class="interactive-tool-card" id="calc-section">
+      <div class="hero-pill">
+        <span>💡 Ferramenta Científica</span>
+      </div>
+      <h2>Calculadora de Déficit Calórico Feminino</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        O treino na Smart Fit cria o estímulo de firmeza e queima calórica. Calcule a ingestão diária recomendada para queimar gordura de forma saudável.
+      </p>
+
+      <div class="tool-grid">
+        <div>
+          <div class="form-group">
+            <label for="calc-weight">Peso atual (kg):</label>
+            <input type="number" id="calc-weight" class="form-input" placeholder="Ex: 65" value="65">
+          </div>
+          <div class="form-group">
+            <label for="calc-height">Altura (cm):</label>
+            <input type="number" id="calc-height" class="form-input" placeholder="Ex: 165" value="165">
+          </div>
+          <div class="form-group">
+            <label for="calc-age">Idade (anos):</label>
+            <input type="number" id="calc-age" class="form-input" placeholder="Ex: 28" value="28">
+          </div>
+          <div class="form-group">
+            <label for="calc-frequency">Frequência de Treino Smart Fit:</label>
+            <select id="calc-frequency" class="form-input">
+              <option value="3">3 vezes por semana</option>
+              <option value="4" selected>4 a 5 vezes por semana</option>
+              <option value="6">6 vezes por semana</option>
+            </select>
+          </div>
+          <button class="btn-timer primary" id="calc-btn" style="width: 100%; padding: 12px; font-size: 1rem;">Calcular Meta Diária</button>
+        </div>
+
+        <div class="calc-result-box" id="result-container">
+          <span style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Meta Diária para Secar</span>
+          <div class="result-number" id="result-calories">1.520 kcal</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
+            Gasto Calórico Total Diário (TDEE): <strong id="result-tdee" style="color: #fff;">1.970 kcal</strong><br>
+            Déficit metabólico sugerido: <strong id="result-deficit" style="color: var(--accent-pink);">-450 kcal/dia</strong>
+          </p>
+          <div style="margin-top: 15px; font-size: 0.85rem; color: #a0aec0; background: rgba(255,255,255,0.04); padding: 10px; border-radius: 8px;">
+            ✨ <strong>Dica Smart Fit:</strong> Mantenha ingestão de proteínas (cerca de 1.6g a 2.0g por kg) para preservar coxas e glúteos torneados durante a redução de gordura.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal Interativo de Detalhes do Exercício -->
+  <div class="modal-overlay" id="exercise-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Detalhes do Exercício</h3>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-video-container">
+          <video id="modal-video" controls autoplay loop playsinline></video>
+        </div>
+
+        <div class="exercise-smartfit-machine">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43 1.43 1.43 2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43z"/>
+          </svg>
+          <span id="modal-machine">Equipamento Smart Fit</span>
+        </div>
+
+        <div style="margin: 12px 0; color: #cbd5e1; font-weight: 600;">
+          Prescrição: <span id="modal-reps" style="color: var(--accent-pink);">4 séries | 12 reps</span>
+        </div>
+
+        <div class="modal-section-title">
+          <span>📌 Dicas de Execução Perfeita & Postura</span>
+        </div>
+        <ul class="modal-tips-list" id="modal-tips-list">
+          <!-- Preenchido via JavaScript -->
+        </ul>
+
+        <div class="modal-section-title" style="margin-top: 20px;">
+          <span>🔥 Dica Aceleradora de Queima de Gordura</span>
+        </div>
+        <p id="modal-burntip" style="font-size: 0.95rem; color: #e2e8f0; background: rgba(255, 45, 117, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid var(--accent-pink);"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>SmartFit Mulher &bull; Treinos e Emagrecimento Feminino com Máquinas Smart Fit &bull; Feito com <span>❤</span></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
